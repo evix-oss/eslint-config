@@ -1,7 +1,7 @@
 {
     "name": "@evix-oss/eslint-config",
     "type": "module",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Personalized ESLint config",
     "author": "Steven Whitfield (https://github.com/stevmwhitfield)",
     "license": "MIT",
