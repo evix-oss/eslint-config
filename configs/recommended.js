@@ -1,5 +1,8 @@
+// @ts-check
 import js from '@eslint/js';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import * as pluginImportX from 'eslint-plugin-import-x';
+import { createNodeResolver } from 'eslint-plugin-import-x';
 import pluginPromise from 'eslint-plugin-promise';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -39,9 +42,6 @@ export default tseslint.config(
         },
         linterOptions: {
             reportUnusedDisableDirectives: true,
-        },
-        plugins: {
-            promise: pluginPromise,
         },
         extends: [
             pluginImportX.flatConfigs.recommended,
