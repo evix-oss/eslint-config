@@ -1,8 +1,8 @@
-import globals from 'globals';
 import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import pluginImport from 'eslint-plugin-import';
+import * as pluginImportX from 'eslint-plugin-import-x';
 import pluginPromise from 'eslint-plugin-promise';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
     js.configs.recommended,
@@ -43,7 +43,11 @@ export default tseslint.config(
         plugins: {
             promise: pluginPromise,
         },
-        extends: [pluginImport.flatConfigs.recommended, pluginPromise.configs['flat/recommended']],
+        extends: [
+            pluginImportX.flatConfigs.recommended,
+            pluginImportX.flatConfigs.typescript,
+            pluginPromise.configs['flat/recommended'],
+        ],
         rules: {
             'array-callback-return': 'error',
             'block-scoped-var': 'error',
@@ -52,15 +56,15 @@ export default tseslint.config(
             'default-case-last': 'error',
             'dot-notation': 'error',
             'eqeqeq': ['error', 'smart'],
-            'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
-            'import/first': 'error',
-            'import/newline-after-import': 'error',
-            'import/no-empty-named-blocks': 'error',
-            'import/no-mutable-exports': 'error',
-            'import/no-named-as-default': 'error',
-            'import/no-named-default': 'error',
-            'import/no-self-import': 'error',
-            'import/order': [
+            'import-x/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+            'import-x/first': 'error',
+            'import-x/newline-after-import': 'error',
+            'import-x/no-empty-named-blocks': 'error',
+            'import-x/no-mutable-exports': 'error',
+            'import-x/no-named-as-default': 'error',
+            'import-x/no-named-default': 'error',
+            'import-x/no-self-import': 'error',
+            'import-x/order': [
                 'error',
                 {
                     groups: [
@@ -193,15 +197,15 @@ export default tseslint.config(
             },
         },
         settings: {
-            'import/internal-regex': '^~/',
-            'import/resolver': {
-                node: {
-                    extensions: ['.ts', '.tsx'],
-                },
-                typescript: {
+            'import-x/internal-regex': '^~/',
+            'import-x/resolver-next': [
+                createTypeScriptImportResolver({
                     alwaysTryTypes: true,
-                },
-            },
+                }),
+                createNodeResolver({
+                    extensions: ['.js', '.ts'],
+                }),
+            ],
         },
     },
 );
